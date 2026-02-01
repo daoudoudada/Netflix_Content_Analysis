@@ -1,457 +1,319 @@
-# 🚀 Guía de Uso - Netflix Analysis Project
+# 📖 Guía de Uso - Netflix Analysis Project
 
-## 📋 Contenido del Proyecto
+## 🎯 Estructura del Proyecto
 
-Este proyecto contiene un análisis completo de datos de Netflix con Machine Learning. Aquí encontrarás:
-
-### 📁 Estructura de Archivos
+El proyecto sigue una estructura profesional y modular:
 
 ```
 netflix_analysis/
 │
-├── 📊 data/                          # Datos (descarga el CSV de Kaggle)
-│   └── netflix_titles.csv            # Dataset original
+├── data/                            # Datos del proyecto
+│   └── netflix_titles.csv          # Dataset de Netflix
 │
-├── 📓 notebooks/                      # Notebooks y scripts
-│   └── netflix_complete_analysis.py  # Script principal con todo el análisis
+├── notebooks/                       # Scripts de análisis
+│   └── netflix_complete_analysis.py # Script principal
 │
-├── 🐍 src/                            # Módulos de código reutilizable
-│   ├── data_cleaning.py               # Funciones de limpieza
-│   ├── visualization.py               # Funciones de visualización
-│   └── ml_models.py                   # Funciones de ML
+├── src/                            # Código modular
+│   ├── __init__.py                 # Inicialización del paquete
+│   ├── data_cleaning.py            # Limpieza de datos
+│   ├── eda.py                      # Análisis exploratorio
+│   ├── visualization.py            # Visualizaciones
+│   └── ml_models.py                # Modelos de ML
 │
-├── 📊 visualizations/                 # Gráficos generados (9 imágenes)
-│   ├── 01_content_distribution.png    # Movies vs TV Shows
-│   ├── 02_top_countries.png           # Top países productores
-│   ├── 03_temporal_evolution.png      # Evolución temporal
-│   ├── 04_top_genres.png              # Géneros más comunes
-│   ├── 05_ratings_distribution.png    # Distribución de ratings
-│   ├── 06_movie_duration.png          # Duración de películas
-│   ├── 07_heatmap_year_type.png       # Heatmap año-tipo
-│   ├── 08_model_comparison.png        # Comparación de modelos
-│   └── 09_confusion_matrices.png      # Matrices de confusión
+├── visualizations/                 # Gráficos generados
+│   ├── 01_content_distribution.png
+│   ├── 02_top_countries.png
+│   └── ... (9 visualizaciones total)
 │
-├── 📄 README.md                       # Documentación principal
-├── 📄 INSIGHTS_CONCLUSIONS.md         # Insights y conclusiones detalladas
-├── 📄 GUIA_USO.md                     # Esta guía
-└── 📄 requirements.txt                # Dependencias Python
+├── results/                        # Resultados del análisis
+│   └── model_metrics.csv           # Métricas de modelos ML
+│
+├── .gitignore                      # Archivos ignorados por Git
+├── README.md                       # Documentación principal
+├── requirements.txt                # Dependencias Python
+├── GUIA_USO.md                    # Este archivo
+└── INSIGHTS_CONCLUSIONS.md        # Insights y conclusiones
 ```
 
 ---
 
-## ⚙️ Instalación
+## 🚀 Cómo Ejecutar el Proyecto
 
-### Paso 1: Requisitos Previos
-
-- **Python 3.8+** instalado
-- **pip** actualizado
-- **Git** (opcional, para clonar)
-
-### Paso 2: Clonar o Descargar
+### 1️⃣ Instalación de Dependencias
 
 ```bash
-# Opción A: Clonar repositorio
-git clone https://github.com/tu-usuario/netflix-analysis.git
-cd netflix-analysis
-
-# Opción B: Descargar ZIP y extraer
-```
-
-### Paso 3: Crear Entorno Virtual (Recomendado)
-
-```bash
-# Windows
+# Crear entorno virtual (recomendado)
 python -m venv venv
+
+# Activar entorno virtual
+# En Windows:
 venv\Scripts\activate
-
-# Linux/Mac
-python3 -m venv venv
+# En Linux/Mac:
 source venv/bin/activate
-```
 
-### Paso 4: Instalar Dependencias
-
-```bash
+# Instalar dependencias
 pip install -r requirements.txt
 ```
 
-### Paso 5: Descargar Dataset
-
-1. Ir a: https://www.kaggle.com/datasets/shivamb/netflix-shows
-2. Descargar `netflix_titles.csv`
-3. Colocar en carpeta `data/`
-
----
-
-## 🎯 Cómo Usar Este Proyecto
-
-### Opción 1: Ejecutar Script Completo
-
-El análisis completo se puede ejecutar con un solo comando:
+### 2️⃣ Ejecutar el Análisis Completo
 
 ```bash
+# Desde el directorio raíz del proyecto
 python notebooks/netflix_complete_analysis.py
 ```
 
-**Esto ejecutará:**
+Este script ejecutará:
 1. ✅ Limpieza de datos
 2. ✅ Análisis exploratorio (EDA)
-3. ✅ Generación de 9 visualizaciones
-4. ✅ Entrenamiento de 2 modelos ML
-5. ✅ Evaluación y comparación
+3. ✅ Generación de visualizaciones
+4. ✅ Entrenamiento de modelos ML
+5. ✅ Exportación de resultados
 
-**Output esperado:**
-- 9 gráficos PNG en `visualizations/`
-- Métricas impresas en consola
-- Resumen de insights
+### 3️⃣ Resultados Generados
 
-**Tiempo de ejecución:** ~2-3 minutos
+Después de la ejecución encontrarás:
 
----
+**Visualizaciones** (carpeta `visualizations/`):
+- `01_content_distribution.png` - Distribución Movies vs TV Shows
+- `02_top_countries.png` - Top 10 países productores
+- `03_temporal_evolution.png` - Evolución temporal
+- `04_top_genres.png` - Géneros más comunes
+- `05_ratings_distribution.png` - Distribución de ratings
+- `06_movie_duration.png` - Duración de películas
+- `07_heatmap_year_type.png` - Heatmap año-tipo
+- `08_model_comparison.png` - Comparación de modelos
+- `09_confusion_matrices.png` - Matrices de confusión
 
-### Opción 2: Usar Módulos Individuales
-
-Si prefieres ejecutar partes específicas:
-
-#### 🧹 Solo Limpieza de Datos
-
-```python
-from src.data_cleaning import full_data_cleaning_pipeline
-import pandas as pd
-
-df = pd.read_csv('data/netflix_titles.csv')
-df_clean = full_data_cleaning_pipeline(df)
-```
-
-#### 📊 Solo Visualizaciones
-
-```python
-from src.visualization import (
-    plot_content_distribution,
-    plot_top_countries,
-    plot_temporal_evolution
-)
-
-# Generar gráfico específico
-plot_content_distribution(df_clean, save_path='my_chart.png')
-```
-
-#### 🤖 Solo Machine Learning
-
-```python
-from src.ml_models import train_random_forest, train_logistic_regression
-
-# Entrenar modelo
-model, predictions, metrics = train_random_forest(X_train, y_train, X_test, y_test)
-
-print(f"Accuracy: {metrics['accuracy']:.4f}")
-```
+**Resultados** (carpeta `results/`):
+- `model_metrics.csv` - Métricas de modelos ML
 
 ---
 
-### Opción 3: Jupyter Notebook
+## 🔧 Uso de Módulos Individuales
 
-Si prefieres trabajar interactivamente:
+Puedes usar los módulos de forma independiente:
 
-```bash
-# Instalar Jupyter
-pip install jupyter
+### Módulo de Limpieza de Datos
 
-# Convertir script a notebook
-jupyter nbconvert --to notebook notebooks/netflix_complete_analysis.py
+```python
+from src.data_cleaning import clean_data
 
-# Abrir Jupyter
-jupyter notebook
+# Limpiar datos
+df = clean_data('data/netflix_titles.csv')
+```
+
+### Módulo de Análisis Exploratorio
+
+```python
+from src.eda import perform_eda
+
+# Realizar EDA
+results = perform_eda(df)
+```
+
+### Módulo de Visualizaciones
+
+```python
+from src.visualization import create_all_visualizations
+
+# Generar todas las visualizaciones
+create_all_visualizations(df, 'visualizations/')
+```
+
+### Módulo de Machine Learning
+
+```python
+from src.ml_models import train_and_evaluate_models
+
+# Entrenar y evaluar modelos
+ml_results = train_and_evaluate_models(df, 'results/')
 ```
 
 ---
 
-## 📊 Entendiendo los Resultados
+## 📊 Descripción de los Módulos
 
-### Visualizaciones Generadas
+### 1. `data_cleaning.py`
 
-| # | Archivo | Descripción | Insight Clave |
-|---|---------|-------------|---------------|
-| 1 | `01_content_distribution.png` | Barras Movies vs TV Shows | 70% son películas |
-| 2 | `02_top_countries.png` | Top 10 países productores | USA domina con 35% |
-| 3 | `03_temporal_evolution.png` | Líneas de tiempo | Series crecen más rápido |
-| 4 | `04_top_genres.png` | Géneros más comunes | Drama lidera |
-| 5 | `05_ratings_distribution.png` | Ratings más frecuentes | TV-MA es el más común |
-| 6 | `06_movie_duration.png` | Histograma duración | Media ~95 minutos |
-| 7 | `07_heatmap_year_type.png` | Heatmap año-tipo | Boom en 2020-2022 |
-| 8 | `08_model_comparison.png` | Comparación modelos | Random Forest gana |
-| 9 | `09_confusion_matrices.png` | Matrices de confusión | Alta precisión |
+**Funciones principales:**
+- `load_data(csv_path)` - Carga el dataset
+- `handle_missing_values(df)` - Trata valores nulos
+- `process_dates(df)` - Procesa fechas
+- `clean_country_column(df)` - Limpia columna de países
+- `process_genres(df)` - Procesa géneros
+- `process_duration(df)` - Convierte duración a numérica
+- `clean_data(csv_path)` - Ejecuta todo el pipeline de limpieza
+
+### 2. `eda.py`
+
+**Funciones principales:**
+- `analyze_content_distribution(df)` - Analiza Movies vs TV Shows
+- `analyze_top_countries(df)` - Analiza países productores
+- `analyze_temporal_evolution(df)` - Analiza evolución temporal
+- `analyze_genres(df)` - Analiza géneros
+- `analyze_ratings(df)` - Analiza ratings
+- `analyze_duration(df)` - Analiza duración
+- `answer_business_questions(df)` - Responde preguntas de negocio
+- `perform_eda(df)` - Ejecuta todo el análisis exploratorio
+
+### 3. `visualization.py`
+
+**Funciones principales:**
+- `plot_content_distribution(df, output_dir)` - Gráfico de distribución
+- `plot_top_countries(df, output_dir)` - Gráfico de países
+- `plot_temporal_evolution(df, output_dir)` - Gráfico de evolución
+- `plot_top_genres(df, output_dir)` - Gráfico de géneros
+- `plot_ratings_distribution(df, output_dir)` - Gráfico de ratings
+- `plot_movie_duration(df, output_dir)` - Gráfico de duración
+- `plot_heatmap_year_type(df, output_dir)` - Heatmap
+- `plot_model_comparison(results_df, output_dir)` - Comparación de modelos
+- `plot_confusion_matrices(cm_lr, cm_rf, output_dir)` - Matrices de confusión
+- `create_all_visualizations(df, output_dir)` - Genera todas las visualizaciones
+
+### 4. `ml_models.py`
+
+**Funciones principales:**
+- `prepare_ml_data(df)` - Prepara datos para ML
+- `train_logistic_regression(X_train, X_test, y_train, y_test)` - Entrena Logistic Regression
+- `train_random_forest(X_train, X_test, y_train, y_test, features)` - Entrena Random Forest
+- `compare_models(results_dict)` - Compara modelos
+- `save_model_metrics(results_df, output_dir)` - Guarda métricas
+- `train_and_evaluate_models(df, results_dir)` - Pipeline completo de ML
+- `print_conclusions()` - Imprime conclusiones
 
 ---
 
-### Métricas de ML
+## 💡 Flujo de Trabajo del Proyecto
 
-**Modelos entrenados:**
-1. **Logistic Regression** - Modelo base
-2. **Random Forest** - Modelo avanzado ✅ (Mejor)
+```
+1. CARGA DE DATOS
+   └── data/netflix_titles.csv
 
-**Métricas evaluadas:**
-- **Accuracy**: Precisión general del modelo
-- **Precision**: De las predicciones positivas, cuántas son correctas
-- **Recall**: De los casos positivos reales, cuántos detectamos
-- **F1-Score**: Balance entre Precision y Recall
+2. LIMPIEZA (data_cleaning.py)
+   ├── Tratamiento de nulos
+   ├── Procesamiento de fechas
+   ├── Limpieza de países
+   ├── Procesamiento de géneros
+   └── Normalización de duración
 
-**Resultado esperado:**
-- Accuracy: ~85-87%
-- F1-Score: ~0.77-0.78
+3. ANÁLISIS EXPLORATORIO (eda.py)
+   ├── Distribución de contenido
+   ├── Análisis geográfico
+   ├── Evolución temporal
+   ├── Análisis de géneros
+   └── Preguntas de negocio
 
----
+4. VISUALIZACIONES (visualization.py)
+   ├── 7 gráficos de EDA
+   └── 2 gráficos de ML
+   → Guardados en /visualizations/
 
-## 🔧 Personalización
+5. MACHINE LEARNING (ml_models.py)
+   ├── Preparación de features
+   ├── Entrenamiento de modelos
+   ├── Evaluación
+   └── Comparación
+   → Métricas en /results/
 
-### Cambiar Features del Modelo
-
-En `notebooks/netflix_complete_analysis.py`, línea ~365:
-
-```python
-# Features actuales
-features = ['release_year', 'rating_encoded', 'duration_numeric', 
-            'country_encoded', 'genre_encoded', 'num_genres']
-
-# Añadir más features
-features = ['release_year', 'rating_encoded', 'duration_numeric', 
-            'country_encoded', 'genre_encoded', 'num_genres',
-            'month_added', 'quarter_added']  # ← Nuevas
+6. CONCLUSIONES
+   └── Insights y recomendaciones
 ```
 
-### Cambiar Hiperparámetros
+---
+
+## 🔍 Personalización
+
+### Modificar Parámetros
+
+Puedes modificar parámetros en el script principal:
 
 ```python
-# Random Forest actual
-rf_model = RandomForestClassifier(n_estimators=100, random_state=42, max_depth=10)
+# En notebooks/netflix_complete_analysis.py
 
-# Mejorado
+# Cambiar número de países a mostrar
+top_countries = analyze_top_countries(df, top_n=15)
+
+# Cambiar número de géneros
+top_genres = analyze_genres(df, top_n=15)
+
+# Modificar parámetros del modelo Random Forest
 rf_model = RandomForestClassifier(
-    n_estimators=200,      # ← Más árboles
-    max_depth=15,          # ← Mayor profundidad
-    min_samples_split=5,   # ← Más conservador
+    n_estimators=200,  # Aumentar árboles
+    max_depth=15,      # Aumentar profundidad
     random_state=42
 )
 ```
 
-### Añadir Nuevos Modelos
+### Añadir Nuevas Visualizaciones
 
 ```python
-from sklearn.ensemble import GradientBoostingClassifier
+# Crear tu propia visualización
+import matplotlib.pyplot as plt
 
-# Añadir después de Random Forest
-gb_model = GradientBoostingClassifier(random_state=42)
-gb_model.fit(X_train_scaled, y_train)
-y_pred_gb = gb_model.predict(X_test_scaled)
+def mi_visualizacion(df, output_dir):
+    plt.figure(figsize=(12, 6))
+    # Tu código aquí
+    plt.savefig(f'{output_dir}/mi_grafico.png', dpi=300)
+    plt.close()
 ```
 
 ---
 
-## 📈 Casos de Uso
+## 📝 Notas Importantes
 
-### 1. Para Portafolio de Data Analyst
-
-**Qué destacar:**
-- ✅ Limpieza profesional de datos reales
-- ✅ EDA completo con visualizaciones
-- ✅ Insights de negocio accionables
-- ✅ Código limpio y documentado
-
-**Cómo presentarlo:**
-- Sube a GitHub con README completo
-- Crea un PDF con las visualizaciones principales
-- Graba un video de 3-5 min explicando insights
-- Añade a LinkedIn con hashtags: #DataAnalysis #Python #Netflix
-
-### 2. Para Portafolio de ML Engineer
-
-**Qué destacar:**
-- ✅ Pipeline completo de ML
-- ✅ Comparación rigurosa de modelos
-- ✅ Feature engineering
-- ✅ Código modular y productizable
-
-**Cómo presentarlo:**
-- Documenta decisiones técnicas (por qué Random Forest)
-- Añade notebook con GridSearch de hiperparámetros
-- Muestra curvas ROC y métricas avanzadas
-- Crea API REST para servir el modelo
-
-### 3. Para Entrevistas Técnicas
-
-**Preguntas que puedes responder:**
-- "¿Cómo manejas datos nulos?"
-- "¿Qué visualizaciones usas para EDA?"
-- "¿Cómo evalúas modelos de clasificación?"
-- "¿Cómo traduces resultados técnicos a negocio?"
-
-**Demo en vivo:**
-- Ejecuta el script en 3 minutos
-- Explica 2-3 insights clave
-- Muestra el mejor modelo y métricas
-- Discute mejoras posibles
+1. **Dataset**: Asegúrate de que `data/netflix_titles.csv` existe antes de ejecutar
+2. **Tiempo de ejecución**: El análisis completo toma aproximadamente 2-3 minutos
+3. **Memoria**: Requiere ~500MB de RAM
+4. **Python**: Compatible con Python 3.8+
+5. **Dependencias**: Todas listadas en `requirements.txt`
 
 ---
 
-## 🐛 Troubleshooting
+## 🐛 Solución de Problemas
 
-### Error: "ModuleNotFoundError: No module named 'pandas'"
+### Error: "No module named 'src'"
 
-**Solución:**
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn
+# Asegúrate de ejecutar desde el directorio raíz
+cd "c:\Users\ddaou\Desktop\data analist"
+python notebooks/netflix_complete_analysis.py
 ```
 
 ### Error: "FileNotFoundError: netflix_titles.csv"
 
-**Solución:**
-1. Descarga el dataset de Kaggle
-2. Colócalo en `data/netflix_titles.csv`
-3. O modifica la ruta en el script
-
-### Error: Gráficos no se guardan
-
-**Solución:**
 ```bash
-mkdir -p visualizations
+# Verifica que el archivo existe
+ls data/netflix_titles.csv
 ```
 
-### Warning: ConvergenceWarning en Logistic Regression
+### Error: "ImportError: matplotlib"
 
-**Solución:**
-- Es normal con datasets grandes
-- Aumenta `max_iter` a 2000 si persiste
-- O ignora (no afecta resultados significativamente)
-
----
-
-## 💡 Tips y Best Practices
-
-### 1. Reproducibilidad
-
-Siempre usa `random_state=42` en:
-- `train_test_split()`
-- Modelos de ML
-- Generación de datos sintéticos
-
-### 2. Documentación
-
-Comenta cada paso importante:
-```python
-# Codificar país - necesario para el modelo
-df['country_encoded'] = le_country.fit_transform(df['country'])
-```
-
-### 3. Versionado
-
-Usa Git para trackear cambios:
 ```bash
-git add .
-git commit -m "feat: Añadido modelo XGBoost"
-git push
-```
-
-### 4. Testing
-
-Añade tests unitarios:
-```python
-def test_data_cleaning():
-    df_test = pd.DataFrame({'director': [None, 'Someone']})
-    df_clean = handle_missing_values(df_test)
-    assert df_clean['director'].isnull().sum() == 0
+# Reinstala dependencias
+pip install -r requirements.txt
 ```
 
 ---
 
-## 📚 Recursos Adicionales
+## 📚 Referencias
 
-### Documentación
-- [Pandas](https://pandas.pydata.org/docs/)
-- [Scikit-learn](https://scikit-learn.org/stable/)
-- [Matplotlib](https://matplotlib.org/stable/contents.html)
-- [Seaborn](https://seaborn.pydata.org/)
-
-### Tutoriales Relacionados
-- [Kaggle Learn - Data Cleaning](https://www.kaggle.com/learn/data-cleaning)
-- [Kaggle Learn - Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning)
-- [Real Python - Pandas Tutorial](https://realpython.com/pandas-python-explore-dataset/)
-
-### Datasets Similares
-- [IMDb Movies Dataset](https://www.kaggle.com/datasets/ashirwadsangwan/imdb-dataset)
-- [Amazon Prime Movies](https://www.kaggle.com/datasets/shivamb/amazon-prime-movies-and-tv-shows)
-- [Disney+ Content](https://www.kaggle.com/datasets/shivamb/disney-movies-and-tv-shows)
+- **Dataset**: [Kaggle - Netflix Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
+- **Scikit-learn**: [Documentación oficial](https://scikit-learn.org/)
+- **Pandas**: [Documentación oficial](https://pandas.pydata.org/)
+- **Matplotlib**: [Documentación oficial](https://matplotlib.org/)
 
 ---
 
-## 🤝 Contribuciones
+## ✅ Checklist de Ejecución
 
-¿Quieres mejorar este proyecto?
-
-1. Fork el repositorio
-2. Crea una rama: `git checkout -b feature/nueva-funcionalidad`
-3. Commit: `git commit -m 'Añade nueva funcionalidad'`
-4. Push: `git push origin feature/nueva-funcionalidad`
-5. Abre un Pull Request
-
-**Ideas de mejoras:**
-- [ ] Dashboard interactivo con Streamlit
-- [ ] Predicción de popularidad
-- [ ] Sistema de recomendación
-- [ ] Análisis de sentimiento en descripciones
-- [ ] API REST para servir el modelo
+- [ ] Entorno virtual creado y activado
+- [ ] Dependencias instaladas (`pip install -r requirements.txt`)
+- [ ] Dataset en `data/netflix_titles.csv`
+- [ ] Script ejecutado (`python notebooks/netflix_complete_analysis.py`)
+- [ ] Visualizaciones generadas en `/visualizations/`
+- [ ] Métricas guardadas en `/results/model_metrics.csv`
+- [ ] Resultados revisados
 
 ---
 
-## ❓ FAQ
-
-**P: ¿Necesito descargar el dataset?**  
-R: Sí, descárgalo de Kaggle y colócalo en `data/`
-
-**P: ¿Funciona con otros datasets de streaming?**  
-R: Sí, solo ajusta nombres de columnas
-
-**P: ¿Puedo usar esto comercialmente?**  
-R: Revisa licencia del dataset en Kaggle primero
-
-**P: ¿Cuánto tiempo toma ejecutar todo?**  
-R: 2-3 minutos en una laptop normal
-
-**P: ¿Funciona en Google Colab?**  
-R: Sí, solo sube los archivos y ejecuta
-
----
-
-## 📞 Soporte
-
-Si tienes problemas:
-
-1. Revisa esta guía completa
-2. Busca el error en Google
-3. Abre un Issue en GitHub
-4. Contacta al autor
-
----
-
-## 📝 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver archivo LICENSE.
-
----
-
-## ⭐ ¿Te fue útil?
-
-Si este proyecto te ayudó:
-- Dale ⭐ en GitHub
-- Compártelo en LinkedIn
-- Usa el hashtag #NetflixAnalysis
-
----
-
-**Última actualización:** Febrero 2026  
-**Versión:** 1.0  
-**Autor:** Tu Nombre  
-**Contacto:** tu.email@example.com
-
----
-
-¡Disfruta del análisis! 🚀📊
+**Última actualización:** Febrero 2026

@@ -91,9 +91,10 @@ netflix_analysis/
 │   └── netflix_titles.csv          # Dataset original
 │
 ├── notebooks/
-│   └── netflix_complete_analysis.py # Notebook principal
+│   └── netflix_complete_analysis.py # Script principal de análisis
 │
 ├── src/
+│   ├── __init__.py                 # Inicialización del paquete
 │   ├── data_cleaning.py            # Scripts de limpieza
 │   ├── eda.py                      # Análisis exploratorio
 │   ├── visualization.py            # Funciones de visualización
@@ -286,8 +287,8 @@ Logistic Regression          Random Forest
 ## 👨‍💻 Autor
 
 **Tu Nombre**
-- 💼 LinkedIn: [linkedin.com/in/tu-perfil](https://linkedin.com/in/tu-perfil)
-- 🐙 GitHub: [@tu-usuario](https://github.com/tu-usuario)
+- 💼 LinkedIn: [linkedin.com/in/daoud-oudada](www.linkedin.com/in/daoud-oudada)
+- 🐙 GitHub: [@daoudoudada](https://github.com/daoudoudada)
 - 📧 Email: tu.email@example.com
 
 ---
